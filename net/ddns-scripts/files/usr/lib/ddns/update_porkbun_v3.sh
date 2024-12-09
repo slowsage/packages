@@ -57,10 +57,7 @@ function json_authenticate() {
 function api_call() {
 	local response url
 	url="$__API/$1"
-	write_log 7 "API endpoint URL: $url"
-	write_log 7 "API request JSON payload: $2"
 	response=$($CURL --data "$2" "$url")
-	write_log 7 "API response JSON payload: $response"
 	echo "$response"
 }
 
@@ -141,7 +138,7 @@ function edit_record() {
 
 
 # Try to identify an appropriate existing DNS record to update
-if [ -z $rec_id]; then
+if [ -z $rec_id ]; then
 	write_log 7 "Retrieving DNS $__TYPE record"
 	__ID=$(find_existing_record_id)
 else
